@@ -8,5 +8,10 @@ namespace TiviK2Plus_WebServiceApp
 {
     public class LichPhatSong_DAO : TiviK2Plus_WebServiceApp.DAO.Abstract_DAO
     {
+        #region Properties
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }
