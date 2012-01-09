@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TiviK2Plus_WebServiceApp.DAO.Abstract_DAO" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DAO\Abstract_DAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiviK2Plus_WebServiceApp.DTO.KenhTV_DTO" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAECABAEAgAAAAABAAAAAAAAAAEAAAAUAAAQAIAAAA=</HashCode>
+      <FileName>DTO\KenhTV_DTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiviK2Plus_WebServiceApp.DTO.LichPhatSong_DTO" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAQgACAAAACAEAgAAAAAAAAAQQAAAAAIAAAA=</HashCode>
+      <FileName>DTO\LichPhatSong_DTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiviK2Plus_WebServiceApp.KenhTV_DAO" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DAO\KenhTV_DAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiviK2Plus_WebServiceApp.LichPhatSong_DAO" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DAO\LichPhatSong_DAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiviK2Plus_WebServiceApp.KenhTV_BUS" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BUS\KenhTV_BUS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiviK2Plus_WebServiceApp.LichPhatSong_BUS" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BUS\LichPhatSong_BUS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
