@@ -61,6 +61,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Constants.cs" />
     <Compile Include="DAO\Abstract_DAO.cs" />
     <Compile Include="DTO\KenhTV_DTO.cs" />
     <Compile Include="DTO\LichPhatSong_DTO.cs" />

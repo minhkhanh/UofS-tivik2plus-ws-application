@@ -52,5 +52,12 @@
       <FileName>BUS\LichPhatSong_BUS.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Struct Name="TiviK2Plus_WebServiceApp.Constants" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -7,5 +7,11 @@ namespace TiviK2Plus_WebServiceApp.DAO
 {
     public abstract class Abstract_DAO
     {
+        #region Properties
+        private
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

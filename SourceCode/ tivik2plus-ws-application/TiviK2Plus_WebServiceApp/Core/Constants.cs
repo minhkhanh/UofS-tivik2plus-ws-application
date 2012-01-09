@@ -6,12 +6,7 @@ using System.ComponentModel;
 
 namespace TiviK2Plus_WebServiceApp
 {
-    public class LichPhatSong_BUS
+    public struct Constants
     {
-        #region Properties
-        #endregion
-
-        #region Methods
-        #endregion
     }
 }
