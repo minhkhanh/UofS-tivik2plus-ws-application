@@ -35,6 +35,13 @@ namespace TiviK2Plus_WebServiceApp.DTO
             get { return _lichPhatSong; }
             set { _lichPhatSong = value; }
         }
+
+        private String _reserved;
+        public String Reserved
+        {
+            get { return _reserved; }
+            set { _reserved = value; }
+        }
         #endregion
 
         #region Methods
