@@ -36,11 +36,18 @@ namespace TiviK2Plus_WebServiceApp.DTO
             set { _link = value; }
         }
 
-        private bool _isAvailable;
-        public bool IsAvailable
+        private bool _conHoatDong;
+        public bool ConHoatDong
         {
-            get { return _isAvailable; }
-            set { _isAvailable = value; }
+            get { return _conHoatDong; }
+            set { _conHoatDong = value; }
+        }
+
+        private String _reserved;
+        public String Reserved
+        {
+            get { return _reserved; }
+            set { _reserved = value; }
         }
         #endregion
 
