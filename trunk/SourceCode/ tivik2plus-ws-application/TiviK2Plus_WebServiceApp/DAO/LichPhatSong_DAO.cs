@@ -18,7 +18,7 @@ namespace TiviK2Plus_WebServiceApp
         private const String SQL_QUERY_GET_LICH_PHAT = @"SELECT NoiDung"
                                                      + @"FROM LichPhatSong"
                                                      + @"WHERE MaKenh = " + SQL_PARA_MA_KENH
-                                                     + @" AND Ngay = " + SQL_PARA_NGAY;
+                                                     + " AND (DateDiff(\"y\", Ngay, " + SQL_PARA_NGAY + ") = \"0\")";
 
         private const String SQL_PARA_MA_LICH_PHAT_SONG = @"@maLichPhatSong";
         private const String SQL_PARA_MA_KENH = @"@maKenh";
