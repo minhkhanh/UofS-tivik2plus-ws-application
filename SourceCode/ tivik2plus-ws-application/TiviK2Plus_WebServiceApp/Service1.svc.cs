@@ -19,10 +19,7 @@ namespace TiviK2Plus_WebServiceApp
 
         public List<KenhTV_DTO> GetKenhTVList()
         {
-            KenhTV_DAO _kenhTV_DAO = new KenhTV_DAO();
-            List<KenhTV_DTO> _kenhTVList = _kenhTV_DAO.GetKenhTVList();
-
-            return _kenhTVList;
+            return KenhTV_BUS.Object.GetKenhTVList();
         }
 
         public int Plus(int a, int b)
@@ -37,6 +34,11 @@ namespace TiviK2Plus_WebServiceApp
             obj.Name = "name";
 
             return obj;
+        }
+
+        public bool AddKenhTV(KenhTV_DTO kenhTV)
+        {
+            return KenhTV_BUS.Object.AddKenhTV(kenhTV);
         }
 
         #endregion

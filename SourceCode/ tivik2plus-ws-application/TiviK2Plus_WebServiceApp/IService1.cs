@@ -14,6 +14,7 @@ namespace TiviK2Plus_WebServiceApp
     public interface IService1
     {
         [OperationContract]
+        [WebInvoke(Method="GET", UriTemplate="kenhtv?getlist", ResponseFormat=WebMessageFormat.Json)]
         List<KenhTV_DTO> GetKenhTVList();
 
         [OperationContract]
@@ -23,5 +24,9 @@ namespace TiviK2Plus_WebServiceApp
         [OperationContract]
         [WebInvoke(Method="GET", UriTemplate="test/{id}", ResponseFormat=WebMessageFormat.Json)]
         AkhoiTestClass AkhoiTestOperation(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "kenhtv?insert", ResponseFormat = WebMessageFormat.Json)]
+        bool AddKenhTV(KenhTV_DTO kenhTV);
     }
 }
