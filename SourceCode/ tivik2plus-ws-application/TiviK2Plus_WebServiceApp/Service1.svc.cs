@@ -5,28 +5,28 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.ServiceModel.Activation;
 
 namespace TiviK2Plus_WebServiceApp
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service1 : IService1
     {
-        public string GetData(int value)
+
+        #region IService1 Members
+
+        public List<KenhTV_DTO> GetKenhTVList()
         {
-            return string.Format("You entered: {0}", value);
+            KenhTV_DAO _kenhTV_DAO = new KenhTV_DAO();
+            List<KenhTV_DTO> _kenhTVList = _kenhTV_DAO.GetKenhTVList();
+
+            return _kenhTVList;
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public int Plus(int a, int b)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return a + b;
         }
 
         public string AkhoiTest(string id)
@@ -36,5 +36,7 @@ namespace TiviK2Plus_WebServiceApp
 
             return id;
         }
+
+        #endregion
     }
 }
