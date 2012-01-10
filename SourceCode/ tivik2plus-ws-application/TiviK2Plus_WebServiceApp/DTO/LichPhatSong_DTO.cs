@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 
-namespace TiviK2Plus_WebServiceApp.DTO
+namespace TiviK2Plus_WebServiceApp
 {
+    [DataContract]
     public class LichPhatSong_DTO
     {
         #region Properties
         private int _maLichPhatSong;
+        [DataMember]
         public int MaLichPhatSong
         {
             get { return _maLichPhatSong; }
@@ -16,6 +20,7 @@ namespace TiviK2Plus_WebServiceApp.DTO
         }
 
         private int _maKenh;
+        [DataMember]
         public int MaKenh
         {
             get { return _maKenh; }
@@ -23,6 +28,7 @@ namespace TiviK2Plus_WebServiceApp.DTO
         }
 
         private DateTime _ngay;
+        [DataMember]
         public DateTime Ngay
         {
             get { return _ngay; }
@@ -30,6 +36,7 @@ namespace TiviK2Plus_WebServiceApp.DTO
         }
 
         private String _lichPhatSong;
+        [DataMember]
         public String LichPhatSong
         {
             get { return _lichPhatSong; }
@@ -37,6 +44,7 @@ namespace TiviK2Plus_WebServiceApp.DTO
         }
 
         private String _reserved;
+        [DataMember]
         public String Reserved
         {
             get { return _reserved; }
