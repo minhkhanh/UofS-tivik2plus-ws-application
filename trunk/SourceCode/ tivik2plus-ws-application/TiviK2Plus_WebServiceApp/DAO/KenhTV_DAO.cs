@@ -115,7 +115,6 @@ namespace TiviK2Plus_WebServiceApp
             catch (Exception ex)
             {
                 _kenhTVList = new List<KenhTV_DTO>();
-                return _kenhTVList;
             }
             finally
             {
@@ -145,6 +144,7 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             OleDbConnection _connection = null;
+            int _result = 0;
 
             try
             {
@@ -177,15 +177,11 @@ namespace TiviK2Plus_WebServiceApp
                 _parameter.Value = kenhTV.MoTaKenh;
                 _command.Parameters.Add(_parameter);
 
-                int _result = _command.ExecuteNonQuery();
-                if (_result == 0)
-                {
-                    return Constants.ADD_KENH_TV_FAIL;
-                }
+                _result = _command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                return Constants.ADD_KENH_TV_FAIL;
+                _result = 0;
             }
             finally
             {
@@ -195,7 +191,14 @@ namespace TiviK2Plus_WebServiceApp
                 }
             }
 
-            return Constants.ADD_KENH_TV_SUCCEED;
+            if (_result == 0)
+            {
+                return Constants.ADD_KENH_TV_FAIL;
+            }
+            else
+            {
+                return Constants.ADD_KENH_TV_SUCCEED;
+            }
         }
         #endregion
     }
