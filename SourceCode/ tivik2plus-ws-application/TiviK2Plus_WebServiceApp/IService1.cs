@@ -20,7 +20,7 @@ namespace TiviK2Plus_WebServiceApp
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "test/{id}", ResponseFormat = WebMessageFormat.Xml)]
+        [WebInvoke(Method = "GET", UriTemplate = "test/{id}", ResponseFormat = WebMessageFormat.Json)]
         string AkhoiTest(string id);
     }
 
