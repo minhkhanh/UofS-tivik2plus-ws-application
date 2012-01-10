@@ -27,12 +27,12 @@ namespace TiviK2Plus_WebServiceApp
             set { _tenMaKenh = value; }
         }
 
-        private String _moTa;
+        private String _moTaKenh;
         [DataMember]
-        public String MoTa
+        public String MoTaKenh
         {
-            get { return _moTa; }
-            set { _moTa = value; }
+            get { return _moTaKenh; }
+            set { _moTaKenh = value; }
         }
 
         private String _link;
