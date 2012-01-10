@@ -11,12 +11,56 @@ namespace TiviK2Plus_WebServiceApp
     public class KenhTV_DAO : Abstract_DAO
     {
         #region Properties
-        private const String SQL_QUERY_GET_KENH_TV_LIST = @"SELECT MaKenh, TenMaKenh "
-                                                  + @"FROM KenhTivi ";
-                                                  //+ @"WHERE ";
+        private static KenhTV_DAO _kenhTV_DAO = null;
+        #endregion
+
+        #region Constants
+        private const String SQL_QUERY_GET_KENH_TV_LIST = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich "
+                                                        + @"FROM KenhTivi "
+                                                        + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG;
+        private const String SQL_QUERY_ADD_KENH_TV = @"INSERT INTO KenhTivi(TenMaKenh, LinkPhat, ConHoatDong, NguonGoc, MoTaRutTrich, MoTaKenh) "
+                                                   + @"VALUES ("
+                                                   + SQL_PARA_TEN_MA_KENH + ", " + SQL_PARA_LINK + ", " + SQL_PARA_CON_HOAT_DONG + ", " + SQL_PARA_NGUON_GOC + ", "
+                                                   + SQL_PARA_MO_TA_RUT_TRICH + ", " + SQL_PARA_MO_TA_KENH
+                                                   + @")";
+
+        private const String SQL_PARA_MA_KENH = @"@maKenh";
+        private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
+        private const String SQL_PARA_MO_TA_KENH = @"@moTaKenh";
+        private const String SQL_PARA_LINK = @"@link";
+        private const String SQL_PARA_CON_HOAT_DONG = @"@conHoatDong";
+        private const String SQL_PARA_NGUON_GOC = @"@nguonGoc";
+        private const String SQL_PARA_MO_TA_RUT_TRICH = @"@moTaRutTrich";
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        private KenhTV_DAO()
+        { 
+        }
+
+        /// <summary>
+        /// Get static object represent for KenhTV_DAO class
+        /// </summary>
+        public static KenhTV_DAO Object 
+        {
+            get 
+            {
+                if (_kenhTV_DAO == null)
+                {
+                    _kenhTV_DAO = new KenhTV_DAO();
+                }
+
+                return _kenhTV_DAO;
+            }
+        }
+
+        /// <summary>
+        /// Lấy danh sách các Kênh TV còn hoạt động (đã được check)
+        /// </summary>
+        /// <returns> List<KenhTV_DTO> </returns>
         public List<KenhTV_DTO> GetKenhTVList()
         {
             List<KenhTV_DTO> _kenhTVList = new List<KenhTV_DTO>();
@@ -26,6 +70,11 @@ namespace TiviK2Plus_WebServiceApp
             {
                 _connection = Connect();
                 OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_KENH_TV_LIST, _connection);
+                
+                OleDbParameter _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = Constants.KENH_TV_CON_HOAT_DONG;
+                _command.Parameters.Add(_parameter);
+                
                 OleDbDataReader _dataReader = _command.ExecuteReader();
                 KenhTV_DTO buffer;
                 while (_dataReader.Read())
@@ -37,6 +86,26 @@ namespace TiviK2Plus_WebServiceApp
                     if (!_dataReader.IsDBNull(1))
                     {
                         buffer.TenMaKenh = _dataReader.GetString(1);
+                    }
+
+                    if (!_dataReader.IsDBNull(2))
+                    {
+                        buffer.MoTaKenh = _dataReader.GetString(2);
+                    }
+
+                    if (!_dataReader.IsDBNull(3))
+                    {
+                        buffer.Link = _dataReader.GetString(3);
+                    }
+
+                    if (!_dataReader.IsDBNull(4))
+                    {
+                        buffer.NguonGoc = _dataReader.GetString(4);
+                    }
+
+                    if (!_dataReader.IsDBNull(5))
+                    {
+                        buffer.MoTaRutTrich = _dataReader.GetString(5);
                     }
 
                     _kenhTVList.Add(buffer);
@@ -57,6 +126,76 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             return _kenhTVList;
+        }
+
+        /// <summary>
+        /// Thêm 1 record vào bảng KenhTivi
+        /// </summary>
+        /// <param name="kenhTV">Đối tượng KenhTV_DTO chứa thông tin record cần thêm vào CSDL</param>
+        /// <returns>
+        ///     true:   Thêm thành công
+        ///     false:  Thêm thất bại
+        /// </returns>
+        public bool AddKenhTV(KenhTV_DTO kenhTV)
+        {
+            //Nếu đối tượng kenhTV là null thì thoát khỏi phương thức và trả về giá trị thất bại
+            if (kenhTV == null)
+            {
+                return Constants.ADD_KENH_TV_FAIL;            
+            }
+
+            OleDbConnection _connection = null;
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_ADD_KENH_TV, _connection);
+
+                //Add parameters into command
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
+                _parameter.Value = kenhTV.TenMaKenh;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LINK, OleDbType.VarChar);
+                _parameter.Value = kenhTV.Link;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = kenhTV.ConHoatDong;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_NGUON_GOC, OleDbType.VarChar);
+                _parameter.Value = kenhTV.NguonGoc;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MO_TA_RUT_TRICH, OleDbType.VarChar);
+                _parameter.Value = kenhTV.MoTaRutTrich;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MO_TA_KENH, OleDbType.VarChar);
+                _parameter.Value = kenhTV.MoTaKenh;
+                _command.Parameters.Add(_parameter);
+
+                int _result = _command.ExecuteNonQuery();
+                if (_result == 0)
+                {
+                    return Constants.ADD_KENH_TV_FAIL;
+                }
+            }
+            catch (Exception ex)
+            {
+                return Constants.ADD_KENH_TV_FAIL;
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            return Constants.ADD_KENH_TV_SUCCEED;
         }
         #endregion
     }
