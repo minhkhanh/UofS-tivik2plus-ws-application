@@ -27,11 +27,15 @@ namespace TiviK2Plus_WebServiceApp
                                                    + @"FROM KenhTivi "
                                                    + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG
                                                    + @" AND TenMaKenh = " + SQL_PARA_TEN_MA_KENH;
-        //private const String SQL_QUERY_SEARCH_KENHTV = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich "
-        //                                             + @"FROM KenhTivi"
-        //                                             + @"WHERE ((ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ")"
-        //                                             + @" OR TenMaKenh LIKES"
-        //                                             + @")";
+        private const String SQL_QUERY_SEARCH_KENHTV = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich "
+                                                     + @"FROM KenhTivi "
+                                                     + @"WHERE ((ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ")"
+                                                     + " AND ((TenMaKenh Like " + SQL_PARA_TEN_MA_KENH + ")"
+                                                     + " OR (MoTaKenh Like " + SQL_PARA_MO_TA_KENH + ")"
+                                                     + " OR (LinkPhat Like " + SQL_PARA_LINK + ")"
+                                                     + " OR (NguonGoc Like " + SQL_PARA_NGUON_GOC + ")"
+                                                     + " OR (MoTaRutTrich Like " + SQL_PARA_MO_TA_RUT_TRICH + ")"
+                                                     + @"))";
 
         private const String SQL_PARA_MA_KENH = @"@maKenh";
         private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
@@ -251,6 +255,97 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             return _maKenh;
+        }
+
+        /// <summary>
+        /// Tìm kiếm kênh TV với khóa gần đúng
+        /// </summary>
+        /// <param name="key">Từ khóa tìm kiếm</param>
+        /// <returns>List<KenhTV_DTO></returns>
+        public List<KenhTV_DTO> SearchKenhTVWithKey(String key)
+        {
+            OleDbConnection _connection = null;
+            List<KenhTV_DTO> _kenhTVList = new List<KenhTV_DTO>();
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_SEARCH_KENHTV, _connection);
+
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = Constants.KENH_TV_CON_HOAT_DONG;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
+                _parameter.Value = "%" + key + "%";
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MO_TA_KENH, OleDbType.VarChar);
+                _parameter.Value = "%" + key + "%";
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LINK, OleDbType.VarChar);
+                _parameter.Value = "%" + key + "%";
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_NGUON_GOC, OleDbType.VarChar);
+                _parameter.Value = "%" + key + "%";
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MO_TA_RUT_TRICH, OleDbType.VarChar);
+                _parameter.Value = "%" + key + "%";
+                _command.Parameters.Add(_parameter);
+
+                OleDbDataReader _dataReader = _command.ExecuteReader();
+                KenhTV_DTO _buffer;
+                while (_dataReader.Read())
+                {
+                    _buffer = new KenhTV_DTO();
+
+                    _buffer.MaKenh = _dataReader.GetInt32(0);
+
+                    if (!_dataReader.IsDBNull(1))
+                    {
+                        _buffer.TenMaKenh = _dataReader.GetString(1);
+                    }
+
+                    if (!_dataReader.IsDBNull(2))
+                    {
+                        _buffer.MoTaKenh = _dataReader.GetString(2);
+                    }
+
+                    if (!_dataReader.IsDBNull(3))
+                    {
+                        _buffer.Link = _dataReader.GetString(3);
+                    }
+
+                    if (!_dataReader.IsDBNull(4))
+                    {
+                        _buffer.NguonGoc = _dataReader.GetString(4);
+                    }
+
+                    if (!_dataReader.IsDBNull(5))
+                    {
+                        _buffer.MoTaRutTrich = _dataReader.GetString(5);
+                    }
+
+                    _kenhTVList.Add(_buffer);
+                }
+            }
+            catch (Exception ex)
+            {
+                _kenhTVList = new List<KenhTV_DTO>();
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            return _kenhTVList;
         }
         #endregion
     }

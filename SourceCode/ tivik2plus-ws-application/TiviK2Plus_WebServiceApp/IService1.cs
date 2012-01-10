@@ -14,7 +14,7 @@ namespace TiviK2Plus_WebServiceApp
     public interface IService1
     {
         [OperationContract]
-        [WebInvoke(Method="GET", UriTemplate="kenhtv?getlist", ResponseFormat=WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "kenhtv?getlist", ResponseFormat = WebMessageFormat.Json)]
         List<KenhTV_DTO> GetKenhTVList();
 
         [OperationContract]
@@ -26,11 +26,15 @@ namespace TiviK2Plus_WebServiceApp
         AkhoiTestClass AkhoiTestOperation(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "kenhtv?insert", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "insertkenhtv", ResponseFormat = WebMessageFormat.Json)]
         bool AddKenhTV(KenhTV_DTO kenhTV);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "lichphatsong?tenMaKenh={tenMaKenh}&ngay={ngay}&thang={thang}&nam={nam}", ResponseFormat = WebMessageFormat.Json)]
         String GetLichPhatSong(String tenMaKenh, int ngay, int thang, int nam);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "searchkenhtv?key={key}", ResponseFormat = WebMessageFormat.Json)]
+        List<KenhTV_DTO> SearchKenhTVWithKey(String key);
     }
 }
