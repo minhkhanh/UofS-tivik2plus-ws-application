@@ -12,38 +12,10 @@ namespace TiviK2Plus_WebServiceApp
     [ServiceContract]
     public interface IService1
     {
+        [OperationContract]
+        List<KenhTV_DTO> GetKenhTVList();
 
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "test/{id}", ResponseFormat = WebMessageFormat.Json)]
-        string AkhoiTest(string id);
-    }
-
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        int Plus(int a, int b);
     }
 }
