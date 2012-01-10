@@ -17,5 +17,8 @@ namespace TiviK2Plus_WebServiceApp
 
         [OperationContract]
         int Plus(int a, int b);
+
+        [OperationContract]
+        string AkhoiTest(string id);
     }
 }
