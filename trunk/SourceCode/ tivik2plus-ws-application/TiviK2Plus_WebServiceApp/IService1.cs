@@ -28,5 +28,9 @@ namespace TiviK2Plus_WebServiceApp
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "kenhtv?insert", ResponseFormat = WebMessageFormat.Json)]
         bool AddKenhTV(KenhTV_DTO kenhTV);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "lichphatsong?tenMaKenh={tenMaKenh}&ngay={ngay}&thang={thang}&nam={nam}", ResponseFormat = WebMessageFormat.Json)]
+        String GetLichPhatSong(String tenMaKenh, int ngay, int thang, int nam);
     }
 }
