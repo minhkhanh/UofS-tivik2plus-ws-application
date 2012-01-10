@@ -64,6 +64,11 @@ namespace TiviK2Plus_WebServiceApp
             return KenhTV_BUS.Object.GetLinkPhatWithTenMaKenh(tenMaKenh);
         }
 
+        public void CheckErrorLink(string tenMaKenh)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
