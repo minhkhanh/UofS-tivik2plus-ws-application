@@ -45,6 +45,16 @@ namespace TiviK2Plus_WebServiceApp
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public LichPhatSong_DTO()
+        {
+            _maKenh = 0;
+            _maLichPhatSong = 0;
+            _ngay = new DateTime();
+            _noiDung = @"";
+        }
         #endregion
     }
 }
