@@ -28,5 +28,13 @@ namespace TiviK2Plus_WebServiceApp
             }
             return composite;
         }
+
+        public string AkhoiTest(string id)
+        {
+            //CompositeType obj = new CompositeType();
+            //obj.StringValue = id;
+
+            return id;
+        }
     }
 }
