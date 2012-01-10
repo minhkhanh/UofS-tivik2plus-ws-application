@@ -27,6 +27,11 @@ namespace TiviK2Plus_WebServiceApp
                                                    + @"FROM KenhTivi "
                                                    + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG
                                                    + @" AND TenMaKenh = " + SQL_PARA_TEN_MA_KENH;
+        //private const String SQL_QUERY_SEARCH_KENHTV = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich "
+        //                                             + @"FROM KenhTivi"
+        //                                             + @"WHERE ((ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ")"
+        //                                             + @" OR TenMaKenh LIKES"
+        //                                             + @")";
 
         private const String SQL_PARA_MA_KENH = @"@maKenh";
         private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
