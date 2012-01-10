@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace TiviK2Plus_WebServiceApp
 {
-    public class LichPhatSong_DAO : TiviK2Plus_WebServiceApp.DAO.Abstract_DAO
+    public class LichPhatSong_DAO : Abstract_DAO
     {
         #region Properties
         #endregion
