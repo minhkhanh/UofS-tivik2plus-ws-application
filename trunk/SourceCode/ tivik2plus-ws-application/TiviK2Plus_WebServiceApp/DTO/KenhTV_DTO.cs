@@ -69,6 +69,19 @@ namespace TiviK2Plus_WebServiceApp
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public KenhTV_DTO()
+        {
+            _conHoatDong = false;
+            _link = @"";
+            _maKenh = 0;
+            _moTaKenh = @"";
+            _moTaRutTrich = @"";
+            _nguonGoc = @"";
+            _tenMaKenh = @"";
+        }
         #endregion
     }
 }
