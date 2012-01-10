@@ -54,6 +54,11 @@ namespace TiviK2Plus_WebServiceApp
             }
         }
 
+        public List<KenhTV_DTO> SearchKenhTVWithKey(string key)
+        {
+            return KenhTV_BUS.Object.SearchKenhTVWithKey(key);
+        }
+
         #endregion
     }
 }

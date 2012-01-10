@@ -77,6 +77,16 @@ namespace TiviK2Plus_WebServiceApp
         {
             return _kenhTV_DAO.GetMaKenh(tenMaKenh);
         }
+
+        /// <summary>
+        /// Tìm kiếm kênh TV với khóa gần đúng
+        /// </summary>
+        /// <param name="key">Từ khóa tìm kiếm</param>
+        /// <returns>List<KenhTV_DTO></returns>
+        public List<KenhTV_DTO> SearchKenhTVWithKey(String key)
+        {
+            return _kenhTV_DAO.SearchKenhTVWithKey(key);
+        }
         #endregion
     }
 }
