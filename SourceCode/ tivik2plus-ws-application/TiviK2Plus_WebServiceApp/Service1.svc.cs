@@ -41,6 +41,12 @@ namespace TiviK2Plus_WebServiceApp
             return KenhTV_BUS.Object.AddKenhTV(kenhTV);
         }
 
+        public string GetLichPhatSong(string tenMaKenh, int ngay, int thang, int nam)
+        {
+            DateTime _ngay = new DateTime(nam, thang, ngay);
+            return LichPhatSong_BUS.Object.GetLichPhatSong(tenMaKenh, _ngay);
+        }
+
         #endregion
     }
 }
