@@ -23,6 +23,10 @@ namespace TiviK2Plus_WebServiceApp
                                                    + SQL_PARA_TEN_MA_KENH + ", " + SQL_PARA_LINK + ", " + SQL_PARA_CON_HOAT_DONG + ", " + SQL_PARA_NGUON_GOC + ", "
                                                    + SQL_PARA_MO_TA_RUT_TRICH + ", " + SQL_PARA_MO_TA_KENH
                                                    + @")";
+        private const String SQL_QUERY_GET_MA_KENH = @"SELECT MaKenh "
+                                                   + @"FROM KenhTivi "
+                                                   + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG
+                                                   + @" AND TenMaKenh = " + SQL_PARA_TEN_MA_KENH;
 
         private const String SQL_PARA_MA_KENH = @"@maKenh";
         private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
@@ -199,6 +203,49 @@ namespace TiviK2Plus_WebServiceApp
             {
                 return Constants.ADD_KENH_TV_SUCCEED;
             }
+        }
+
+        /// <summary>
+        /// Lấy mã kênh dựa vào tên mã kênh
+        /// </summary>
+        /// <param name="tenMaKenh"></param>
+        /// <returns>
+        ///     null:           Tìm kiếm thất bại
+        ///     Giá trị khác:   Tìm kiếm thành công
+        /// </returns>
+        public int GetMaKenh(String tenMaKenh)
+        {
+            OleDbConnection _connection = null;
+            int _maKenh = Constants.GET_MA_KENH_FAIL;
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_MA_KENH, _connection);
+
+                OleDbParameter _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
+                _parameter.Value = tenMaKenh;
+                _command.Parameters.Add(_parameter);
+
+                OleDbDataReader _dataReader = _command.ExecuteReader();
+                while (_dataReader.Read())
+                {
+                    _maKenh = _dataReader.GetInt32(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                _maKenh = Constants.GET_MA_KENH_FAIL;
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            return _maKenh;
         }
         #endregion
     }
