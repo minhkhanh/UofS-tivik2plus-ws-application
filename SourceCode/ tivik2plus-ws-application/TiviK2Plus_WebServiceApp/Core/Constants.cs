@@ -8,5 +8,6 @@ namespace TiviK2Plus_WebServiceApp
 {
     public struct Constants
     {
+
     }
 }
