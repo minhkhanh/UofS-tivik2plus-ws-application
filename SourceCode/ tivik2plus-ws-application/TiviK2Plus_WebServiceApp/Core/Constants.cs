@@ -20,5 +20,10 @@ namespace TiviK2Plus_WebServiceApp
         /// </summary>
         public const bool ADD_KENH_TV_SUCCEED = true;
         public const bool ADD_KENH_TV_FAIL = !ADD_KENH_TV_SUCCEED;
+
+        /// <summary>
+        /// GetMaKenh method fail return value
+        /// </summary>
+        public const int GET_MA_KENH_FAIL = -1;
     }
 }

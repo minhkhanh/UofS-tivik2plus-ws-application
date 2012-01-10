@@ -64,6 +64,19 @@ namespace TiviK2Plus_WebServiceApp
         {
             return _kenhTV_DAO.AddKenhTV(kenhTV);
         }
+
+        /// <summary>
+        /// Lấy mã kênh dựa vào tên mã kênh
+        /// </summary>
+        /// <param name="tenMaKenh"></param>
+        /// <returns>
+        ///     null:           Tìm kiếm thất bại
+        ///     Giá trị khác:   Tìm kiếm thành công
+        /// </returns>
+        public int GetMaKenh(String tenMaKenh)
+        {
+            return _kenhTV_DAO.GetMaKenh(tenMaKenh);
+        }
         #endregion
     }
 }
