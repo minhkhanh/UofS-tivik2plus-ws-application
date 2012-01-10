@@ -87,6 +87,16 @@ namespace TiviK2Plus_WebServiceApp
         {
             return _kenhTV_DAO.SearchKenhTVWithKey(key);
         }
+
+        /// <summary>
+        /// Lấy link phát với tên mã kênh (tìm kiếm đúng)
+        /// </summary>
+        /// <param name="tenMaKenh">tên mã kênh cần lấy link</param>
+        /// <returns>String</returns>
+        public String GetLinkPhatWithTenMaKenh(String tenMaKenh)
+        {
+            return _kenhTV_DAO.GetLinkPhatWithTenMaKenh(tenMaKenh);
+        }
         #endregion
     }
 }

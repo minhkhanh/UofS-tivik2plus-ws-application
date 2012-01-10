@@ -36,6 +36,11 @@ namespace TiviK2Plus_WebServiceApp
                                                      + " OR (NguonGoc Like " + SQL_PARA_NGUON_GOC + ")"
                                                      + " OR (MoTaRutTrich Like " + SQL_PARA_MO_TA_RUT_TRICH + ")"
                                                      + @"))";
+        private const String SQL_QUERY_GET_LINK = @"SELECT LinkPhat "
+                                                + @"FROM KenhTivi "
+                                                + @"WHERE ((ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ")"
+                                                + " AND (TenMaKenh Like " + SQL_PARA_TEN_MA_KENH + ")"
+                                                + @")";
 
         private const String SQL_PARA_MA_KENH = @"@maKenh";
         private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
@@ -346,6 +351,51 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             return _kenhTVList;
+        }
+
+        /// <summary>
+        /// Lấy link phát với tên mã kênh (tìm kiếm đúng)
+        /// </summary>
+        /// <param name="tenMaKenh">tên mã kênh cần lấy link</param>
+        /// <returns>String</returns>
+        public String GetLinkPhatWithTenMaKenh(String tenMaKenh)
+        {
+            String _linkPhat = @"";
+            OleDbConnection _connection = null;
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_LINK, _connection);
+
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = Constants.KENH_TV_CON_HOAT_DONG;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
+                _parameter.Value = tenMaKenh;
+                _command.Parameters.Add(_parameter);
+
+                OleDbDataReader _dataReader = _command.ExecuteReader();
+                while (_dataReader.Read())
+                {
+                    _linkPhat = _dataReader.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                _linkPhat = @"";
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            return _linkPhat;
         }
         #endregion
     }

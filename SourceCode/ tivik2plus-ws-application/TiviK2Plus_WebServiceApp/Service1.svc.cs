@@ -59,6 +59,11 @@ namespace TiviK2Plus_WebServiceApp
             return KenhTV_BUS.Object.SearchKenhTVWithKey(key);
         }
 
+        public string GetLinkPhatWithTenMaKenh(string tenMaKenh)
+        {
+            return KenhTV_BUS.Object.GetLinkPhatWithTenMaKenh(tenMaKenh);
+        }
+
         #endregion
     }
 }

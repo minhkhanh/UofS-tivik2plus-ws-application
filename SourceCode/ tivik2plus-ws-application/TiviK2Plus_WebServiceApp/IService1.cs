@@ -36,5 +36,9 @@ namespace TiviK2Plus_WebServiceApp
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "searchkenhtv?key={key}", ResponseFormat = WebMessageFormat.Json)]
         List<KenhTV_DTO> SearchKenhTVWithKey(String key);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "kenhtv/getlink?tenmakenh={tenMaKenh}", ResponseFormat = WebMessageFormat.Json)]
+        String GetLinkPhatWithTenMaKenh(String tenMaKenh);
     }
 }
