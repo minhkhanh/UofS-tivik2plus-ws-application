@@ -43,8 +43,15 @@ namespace TiviK2Plus_WebServiceApp
 
         public string GetLichPhatSong(string tenMaKenh, int ngay, int thang, int nam)
         {
-            DateTime _ngay = new DateTime(nam, thang, ngay);
-            return LichPhatSong_BUS.Object.GetLichPhatSong(tenMaKenh, _ngay);
+            try
+            {
+                DateTime _ngay = new DateTime(nam, thang, ngay);
+                return LichPhatSong_BUS.Object.GetLichPhatSong(tenMaKenh, _ngay);
+            }
+            catch (Exception ex)
+            {
+                return @"";
+            }
         }
 
         #endregion
