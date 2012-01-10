@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using TiviK2Plus_WebServiceApp.Core;
 
 namespace TiviK2Plus_WebServiceApp
 {
@@ -16,9 +17,11 @@ namespace TiviK2Plus_WebServiceApp
         List<KenhTV_DTO> GetKenhTVList();
 
         [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "plus?a={a}&b={b}", ResponseFormat = WebMessageFormat.Json)]
         int Plus(int a, int b);
 
         [OperationContract]
-        string AkhoiTest(string id);
+        [WebInvoke(Method="GET", UriTemplate="test/{id}", ResponseFormat=WebMessageFormat.Json)]
+        AkhoiTestClass AkhoiTestOperation(string id);
     }
 }

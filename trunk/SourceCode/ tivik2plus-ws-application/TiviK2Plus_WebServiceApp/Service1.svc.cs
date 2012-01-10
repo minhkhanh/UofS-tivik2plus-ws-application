@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.ServiceModel.Activation;
+using TiviK2Plus_WebServiceApp.Core;
 
 namespace TiviK2Plus_WebServiceApp
 {
@@ -29,12 +30,13 @@ namespace TiviK2Plus_WebServiceApp
             return a + b;
         }
 
-        public string AkhoiTest(string id)
+        public AkhoiTestClass AkhoiTestOperation(string id)
         {
-            //CompositeType obj = new CompositeType();
-            //obj.StringValue = id;
+            AkhoiTestClass obj = new AkhoiTestClass();
+            obj.Id = id;
+            obj.Name = "name";
 
-            return id;
+            return obj;
         }
 
         #endregion
