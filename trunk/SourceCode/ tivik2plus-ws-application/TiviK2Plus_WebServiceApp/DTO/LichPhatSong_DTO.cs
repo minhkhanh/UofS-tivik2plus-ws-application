@@ -35,20 +35,12 @@ namespace TiviK2Plus_WebServiceApp
             set { _ngay = value; }
         }
 
-        private String _lichPhatSong;
+        private String _noiDung;
         [DataMember]
-        public String LichPhatSong
+        public String NoiDung
         {
-            get { return _lichPhatSong; }
-            set { _lichPhatSong = value; }
-        }
-
-        private String _reserved;
-        [DataMember]
-        public String Reserved
-        {
-            get { return _reserved; }
-            set { _reserved = value; }
+            get { return _noiDung; }
+            set { _noiDung = value; }
         }
         #endregion
 

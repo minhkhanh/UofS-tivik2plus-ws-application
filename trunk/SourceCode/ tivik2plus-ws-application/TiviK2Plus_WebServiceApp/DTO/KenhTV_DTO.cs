@@ -51,12 +51,20 @@ namespace TiviK2Plus_WebServiceApp
             set { _conHoatDong = value; }
         }
 
-        private String _reserved;
+        private String _nguonGoc;
         [DataMember]
-        public String Reserved
+        public String NguonGoc
         {
-            get { return _reserved; }
-            set { _reserved = value; }
+            get { return _nguonGoc; }
+            set { _nguonGoc = value; }
+        }
+
+        private String _moTaRutTrich;
+        [DataMember]
+        public String MoTaRutTrich
+        {
+            get { return _moTaRutTrich; }
+            set { _moTaRutTrich = value; }
         }
         #endregion
 
