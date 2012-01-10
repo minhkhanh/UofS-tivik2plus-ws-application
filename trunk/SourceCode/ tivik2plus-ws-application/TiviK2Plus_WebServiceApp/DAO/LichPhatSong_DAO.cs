@@ -56,10 +56,10 @@ namespace TiviK2Plus_WebServiceApp
         /// <param name="maKenh">mã kênh</param>
         /// <param name="ngay"></param>
         /// <returns></returns>
-        public List<String> GetLichPhatSong(String tenMaKenh, DateTime ngay)
+        public String GetLichPhatSong(String tenMaKenh, DateTime ngay)
         {
             OleDbConnection _connection = null;
-            List<String> _lichPhatSong = new List<String>();
+            String _lichPhatSong = @"";
 
             try
             {
@@ -75,17 +75,14 @@ namespace TiviK2Plus_WebServiceApp
                 _command.Parameters.Add(_parameter);
 
                 OleDbDataReader _dataReader = _command.ExecuteReader();
-                String _buffer;
                 while (_dataReader.Read())
                 {
-                    _buffer = _dataReader.GetString(0);
-
-                    _lichPhatSong.Add(_buffer);
+                    _lichPhatSong = _dataReader.GetString(0);
                 }
             }
             catch (Exception ex)
             {
-                _lichPhatSong = new List<String>();
+                _lichPhatSong = @"";
             }
             finally
             {
