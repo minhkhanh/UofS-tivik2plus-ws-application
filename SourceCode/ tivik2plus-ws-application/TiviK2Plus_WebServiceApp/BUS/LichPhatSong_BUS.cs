@@ -45,7 +45,7 @@ namespace TiviK2Plus_WebServiceApp
         /// <param name="maKenh">mã kênh</param>
         /// <param name="ngay"></param>
         /// <returns></returns>
-        public List<String> GetLichPhatSong(String tenMaKenh, DateTime ngay)
+        public String GetLichPhatSong(String tenMaKenh, DateTime ngay)
         {
             return _lichPhatSong_DAO.GetLichPhatSong(tenMaKenh, ngay);
         }
