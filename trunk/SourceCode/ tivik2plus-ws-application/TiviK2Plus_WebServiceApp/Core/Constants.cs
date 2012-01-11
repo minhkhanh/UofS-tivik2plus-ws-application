@@ -25,5 +25,11 @@ namespace TiviK2Plus_WebServiceApp
         /// GetMaKenh method fail return value
         /// </summary>
         public const int GET_MA_KENH_FAIL = -1;
+
+        /// <summary>
+        /// Updating one record in KenhTivi's table
+        /// </summary>
+        public const bool UPDATE_KENH_TV_SUCCEED = true;
+        public const bool UPDATE_KENH_TV_FAIL = !UPDATE_KENH_TV_SUCCEED;
     }
 }
