@@ -49,6 +49,19 @@ namespace TiviK2Plus_WebServiceApp
         {
             return _lichPhatSong_DAO.GetLichPhatSong(tenMaKenh, ngay);
         }
+
+        /// <summary>
+        /// Thêm 1 record vào bảng LichPhatSong
+        /// </summary>
+        /// <param name="lichPhatSong">Nội dung lịch phát sóng cần thêm</param>
+        /// <returns>
+        ///     true:   Thêm thành công
+        ///     false:  Thêm thất bại
+        /// </returns>
+        public bool AddLichPhatSong(LichPhatSong_DTO lichPhatSong)
+        {
+            return _lichPhatSong_DAO.AddLichPhatSong(lichPhatSong);
+        }
         #endregion
     }
 }

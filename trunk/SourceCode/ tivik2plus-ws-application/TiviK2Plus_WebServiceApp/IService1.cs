@@ -51,7 +51,7 @@ namespace TiviK2Plus_WebServiceApp
         bool UpdateKenhTV(KenhTV_DTO kenhTV);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "deletekenhtv?id={maKenh}", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "kenhtv/delete?makenh={maKenh}", ResponseFormat = WebMessageFormat.Json)]
         bool DeleteKenhTV(int maKenh);
     }
 }
