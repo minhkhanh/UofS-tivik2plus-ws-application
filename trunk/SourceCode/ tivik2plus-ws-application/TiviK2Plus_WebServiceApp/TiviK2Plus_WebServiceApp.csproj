@@ -48,6 +48,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -98,10 +99,9 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>6421</DevelopmentServerPort>
+          <DevelopmentServerPort>5021</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/TiviK2Plus_Service</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

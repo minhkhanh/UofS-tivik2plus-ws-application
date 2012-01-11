@@ -67,6 +67,23 @@ namespace TiviK2Plus_WebServiceApp
             get { return _moTaRutTrich; }
             set { _moTaRutTrich = value; }
         }
+
+        private int _linkHong;
+        [DataMember]
+        public int LinkHong
+        {
+            get { return _linkHong; }
+            set { _linkHong = value; }
+        }
+
+        private int _lichHong;
+        [DataMember]
+        public int LichHong
+        {
+            get { return _lichHong; }
+            set { _lichHong = value; }
+        }
+
         #endregion
 
         #region Methods
