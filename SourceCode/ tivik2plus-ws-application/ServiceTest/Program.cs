@@ -17,6 +17,7 @@ namespace ServiceTest
             {
                 Console.WriteLine("- {0}", endpoint.Address);
             }
+            
 
             Console.WriteLine("Press enter to shutdown the host.");
             Console.ReadLine();
