@@ -25,7 +25,5 @@ namespace TiviK2Plus_WebServiceApp.Core
             get { return _name; }
             set { _name = value; }
         }
-
-
     }
 }
