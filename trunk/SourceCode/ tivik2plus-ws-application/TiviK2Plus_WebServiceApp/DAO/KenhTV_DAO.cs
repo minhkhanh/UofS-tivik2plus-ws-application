@@ -237,7 +237,12 @@ namespace TiviK2Plus_WebServiceApp
                 _connection = Connect();
                 OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_MA_KENH, _connection);
 
-                OleDbParameter _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = Constants.KENH_TV_CON_HOAT_DONG;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
                 _parameter.Value = tenMaKenh;
                 _command.Parameters.Add(_parameter);
 

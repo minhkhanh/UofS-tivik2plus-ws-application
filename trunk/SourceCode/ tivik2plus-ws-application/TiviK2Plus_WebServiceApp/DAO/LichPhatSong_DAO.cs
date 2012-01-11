@@ -15,8 +15,8 @@ namespace TiviK2Plus_WebServiceApp
         #endregion
 
         #region Constants
-        private const String SQL_QUERY_GET_LICH_PHAT = @"SELECT NoiDung"
-                                                     + @"FROM LichPhatSong"
+        private const String SQL_QUERY_GET_LICH_PHAT = @"SELECT NoiDung "
+                                                     + @"FROM LichPhatSong "
                                                      + @"WHERE MaKenh = " + SQL_PARA_MA_KENH
                                                      + " AND (DateDiff(\"y\", Ngay, " + SQL_PARA_NGAY + ") = \"0\")";
 
@@ -60,6 +60,7 @@ namespace TiviK2Plus_WebServiceApp
         {
             OleDbConnection _connection = null;
             String _lichPhatSong = @"";
+            int maKenh = KenhTV_DAO.Object.GetMaKenh(tenMaKenh);
 
             try
             {
@@ -67,7 +68,7 @@ namespace TiviK2Plus_WebServiceApp
                 OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_LICH_PHAT, _connection);
 
                 OleDbParameter _parameter = new OleDbParameter(SQL_PARA_MA_KENH, OleDbType.Integer);
-                _parameter.Value = KenhTV_DAO.Object.GetMaKenh(tenMaKenh);
+                _parameter.Value = maKenh;
                 _command.Parameters.Add(_parameter);
 
                 _parameter = new OleDbParameter(SQL_PARA_NGAY, OleDbType.Date);
