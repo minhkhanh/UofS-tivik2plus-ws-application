@@ -27,17 +27,23 @@ namespace TiviK2Plus_WebServiceApp
         public const int GET_MA_KENH_FAIL = -1;
 
         /// <summary>
-        /// Updating one record in KenhTivi's table
+        /// Updating one record in KenhTivi table
         /// </summary>
         public const bool UPDATE_KENH_TV_SUCCEED = true;
         public const bool UPDATE_KENH_TV_FAIL = !UPDATE_KENH_TV_SUCCEED;
 
         /// <summary>
-        /// Deleting one record in KenhTivi's table
+        /// Deleting one record in KenhTivi table
         /// </summary>
         public const bool DELETE_KENH_TV_SUCCEED = true;
         public const bool DELETE_KENH_TV_FAIL = !DELETE_KENH_TV_SUCCEED;
         public const bool DELETED_RECORD = false;
         public const bool IN_DELETED_RECORD = true;
+
+        /// <summary>
+        /// Inserting one record into LichPhatSong table
+        /// </summary>
+        public const bool ADD_LICH_PHAT_SONG_SUCCEED = true;
+        public const bool ADD_LICH_PHAT_SONG_FAIL = !ADD_LICH_PHAT_SONG_SUCCEED;
     }
 }

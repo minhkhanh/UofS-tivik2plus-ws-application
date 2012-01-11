@@ -518,8 +518,11 @@ namespace TiviK2Plus_WebServiceApp
         /// <summary>
         /// Xóa thông tin kênh tv không còn hữu hiệu nữa
         /// </summary>
-        /// <param name="maKenh"></param>
-        /// <returns></returns>
+        /// <param name="maKenh">mã kênh cần xóa</param>
+        /// <returns>
+        ///     true:   Xóa thành công
+        ///     false:  Xóa thất bại
+        /// </returns>
         public bool DeleteKenhTV(int maKenh)
         {
             OleDbConnection _connection = null;

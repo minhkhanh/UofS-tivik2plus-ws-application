@@ -19,6 +19,11 @@ namespace TiviK2Plus_WebServiceApp
                                                      + @"FROM LichPhatSong "
                                                      + @"WHERE MaKenh = " + SQL_PARA_MA_KENH
                                                      + " AND (DateDiff(\"y\", Ngay, " + SQL_PARA_NGAY + ") = \"0\")";
+        private const String SQL_QUERY_ADD_LICH_PHAT_SONG = @"INSERT INTO LichPhatSong(MaKenh, Ngay, NoiDung) "
+                                                          + @"VALUES ("
+                                                          + SQL_PARA_MA_KENH + ", " + SQL_PARA_NGAY + ", "
+                                                          + SQL_PARA_NOI_DUNG
+                                                          + @")";
 
         private const String SQL_PARA_MA_LICH_PHAT_SONG = @"@maLichPhatSong";
         private const String SQL_PARA_MA_KENH = @"@maKenh";
@@ -94,6 +99,59 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             return _lichPhatSong;
+        }
+
+        /// <summary>
+        /// Thêm 1 record vào bảng LichPhatSong
+        /// </summary>
+        /// <param name="lichPhatSong">Nội dung lịch phát sóng cần thêm</param>
+        /// <returns>
+        ///     true:   Thêm thành công
+        ///     false:  Thêm thất bại
+        /// </returns>
+        public bool AddLichPhatSong(LichPhatSong_DTO lichPhatSong)
+        {
+            OleDbConnection _connection = null;
+            int _result = 0;
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_ADD_LICH_PHAT_SONG, _connection);
+
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_MA_KENH, OleDbType.Integer);
+                _parameter.Value = lichPhatSong.MaKenh;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_NGAY, OleDbType.Date);
+                _parameter.Value = lichPhatSong.Ngay;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_NOI_DUNG, OleDbType.VarChar);
+                _parameter.Value = lichPhatSong.NoiDung;
+                _command.Parameters.Add(_parameter);
+
+                _result = _command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                _result = 0;
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            if (_result == 0)
+            {
+                return Constants.ADD_LICH_PHAT_SONG_FAIL;
+            }
+
+            return Constants.ADD_LICH_PHAT_SONG_SUCCEED;
         }
         #endregion
     }
