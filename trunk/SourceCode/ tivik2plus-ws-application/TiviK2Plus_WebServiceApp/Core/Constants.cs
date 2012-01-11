@@ -31,5 +31,13 @@ namespace TiviK2Plus_WebServiceApp
         /// </summary>
         public const bool UPDATE_KENH_TV_SUCCEED = true;
         public const bool UPDATE_KENH_TV_FAIL = !UPDATE_KENH_TV_SUCCEED;
+
+        /// <summary>
+        /// Deleting one record in KenhTivi's table
+        /// </summary>
+        public const bool DELETE_KENH_TV_SUCCEED = true;
+        public const bool DELETE_KENH_TV_FAIL = !DELETE_KENH_TV_SUCCEED;
+        public const bool DELETED_RECORD = false;
+        public const bool IN_DELETED_RECORD = true;
     }
 }

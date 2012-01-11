@@ -51,6 +51,9 @@ namespace TiviK2Plus_WebServiceApp
                                                      + @"LinkHong = " + SQL_PARA_LINK_HONG + ", "
                                                      + @"LichHong = " + SQL_PARA_LICH_HONG + " "
                                                      + @"WHERE MaKenh = " + SQL_PARA_MA_KENH;
+        private const String SQL_QUERY_DELETE_KENHTV = @"UPDATE KenhTivi "
+                                                     + @"SET ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + " "
+                                                     + @"WHERE MaKenh = " + SQL_PARA_MA_KENH;
 
         private const String SQL_PARA_MA_KENH = @"@maKenh";
         private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
@@ -510,6 +513,52 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             return Constants.UPDATE_KENH_TV_SUCCEED;
+        }
+
+        /// <summary>
+        /// Xóa thông tin kênh tv không còn hữu hiệu nữa
+        /// </summary>
+        /// <param name="maKenh"></param>
+        /// <returns></returns>
+        public bool DeleteKenhTV(int maKenh)
+        {
+            OleDbConnection _connection = null;
+            int _result = 0;
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_DELETE_KENHTV, _connection);
+
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = Constants.DELETED_RECORD;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MA_KENH, OleDbType.Integer);
+                _parameter.Value = maKenh;
+                _command.Parameters.Add(_parameter);
+
+                _result = _command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                _result = 0;
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            if (_result == 0)
+            {
+                return Constants.DELETE_KENH_TV_FAIL;
+            }
+
+            return Constants.DELETE_KENH_TV_SUCCEED;
         }
         #endregion
 
