@@ -97,6 +97,19 @@ namespace TiviK2Plus_WebServiceApp
         {
             return _kenhTV_DAO.GetLinkPhatWithTenMaKenh(tenMaKenh);
         }
+
+        /// <summary>
+        /// Cập nhật thông tin Kênh TV
+        /// </summary>
+        /// <param name="kenhTV">Thông tin kênh TV dùng để update</param>
+        /// <returns>
+        ///     true:   Update thành công
+        ///     false:  Update thất bại
+        /// </returns>
+        public bool UpdateKenhTV(KenhTV_DTO kenhTV)
+        {
+            return _kenhTV_DAO.UpdateKenhTV(kenhTV);
+        }
         #endregion
     }
 }

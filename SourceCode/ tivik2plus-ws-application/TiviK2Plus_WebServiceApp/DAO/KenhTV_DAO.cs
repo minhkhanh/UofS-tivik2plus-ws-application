@@ -41,6 +41,16 @@ namespace TiviK2Plus_WebServiceApp
                                                 + @"WHERE ((ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ")"
                                                 + " AND (TenMaKenh Like " + SQL_PARA_TEN_MA_KENH + ")"
                                                 + @")";
+        private const String SQL_QUERY_UPDATE_KENHTV = @"UPDATE KenhTivi "
+                                                     + @"SET TenMaKenh = " + SQL_PARA_TEN_MA_KENH + ", "
+                                                     + @"LinkPhat = " + SQL_PARA_LINK + ", "
+                                                     + @"ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ", "
+                                                     + @"NguonGoc = " + SQL_PARA_NGUON_GOC + ", "
+                                                     + @"MoTaRutTrich = " + SQL_PARA_MO_TA_RUT_TRICH + ", "
+                                                     + @"MoTaKenh = " + SQL_PARA_MO_TA_KENH + ", "
+                                                     + @"LinkHong = " + SQL_PARA_LINK_HONG + ", "
+                                                     + @"LichHong = " + SQL_PARA_LICH_HONG + " "
+                                                     + @"WHERE MaKenh = " + SQL_PARA_MA_KENH;
 
         private const String SQL_PARA_MA_KENH = @"@maKenh";
         private const String SQL_PARA_TEN_MA_KENH = @"@tenMaKenh";
@@ -49,6 +59,8 @@ namespace TiviK2Plus_WebServiceApp
         private const String SQL_PARA_CON_HOAT_DONG = @"@conHoatDong";
         private const String SQL_PARA_NGUON_GOC = @"@nguonGoc";
         private const String SQL_PARA_MO_TA_RUT_TRICH = @"@moTaRutTrich";
+        private const String SQL_PARA_LINK_HONG = @"@linkHong";
+        private const String SQL_PARA_LICH_HONG = @"@lichHong";
         #endregion
 
         #region Methods
@@ -421,6 +433,83 @@ namespace TiviK2Plus_WebServiceApp
             }
 
             return _linkPhat;
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin Kênh TV
+        /// </summary>
+        /// <param name="kenhTV">Thông tin kênh TV dùng để update</param>
+        /// <returns>
+        ///     true:   Update thành công
+        ///     false:  Update thất bại
+        /// </returns>
+        public bool UpdateKenhTV(KenhTV_DTO kenhTV)
+        {
+            OleDbConnection _connection = null;
+            int _result = 0;
+
+            try
+            {
+                _connection = Connect();
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_UPDATE_KENHTV, _connection);
+
+                OleDbParameter _parameter;
+                _parameter = new OleDbParameter(SQL_PARA_TEN_MA_KENH, OleDbType.VarChar);
+                _parameter.Value = kenhTV.TenMaKenh;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LINK, OleDbType.VarChar);
+                _parameter.Value = kenhTV.Link;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
+                _parameter.Value = kenhTV.ConHoatDong;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_NGUON_GOC, OleDbType.VarChar);
+                _parameter.Value = kenhTV.NguonGoc;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MO_TA_RUT_TRICH, OleDbType.VarChar);
+                _parameter.Value = kenhTV.MoTaRutTrich;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MO_TA_KENH, OleDbType.VarChar);
+                _parameter.Value = kenhTV.MoTaKenh;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LINK_HONG, OleDbType.Integer);
+                _parameter.Value = kenhTV.LinkHong;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LICH_HONG, OleDbType.Integer);
+                _parameter.Value = kenhTV.LichHong;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_MA_KENH, OleDbType.Integer);
+                _parameter.Value = kenhTV.MaKenh;
+                _command.Parameters.Add(_parameter);
+
+                _result = _command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                _result = 0;
+            }
+            finally
+            {
+                if ((_connection != null) && (_connection.State == System.Data.ConnectionState.Open))
+                {
+                    _connection.Close();
+                }
+            }
+
+            if (_result == 0)
+            {
+                return Constants.UPDATE_KENH_TV_FAIL;
+            }
+
+            return Constants.UPDATE_KENH_TV_SUCCEED;
         }
         #endregion
 

@@ -107,6 +107,11 @@ namespace TiviK2Plus_WebServiceApp
             throw new NotImplementedException();
         }
 
+        public bool UpdateKenhTV(KenhTV_DTO kenhTV)
+        {
+            return KenhTV_BUS.Object.UpdateKenhTV(kenhTV);
+        }
+
         #endregion
     }
 }
