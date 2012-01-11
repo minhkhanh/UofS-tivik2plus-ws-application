@@ -15,10 +15,10 @@ namespace TiviK2Plus_WebServiceApp
         #endregion
 
         #region Constants
-        private const String SQL_QUERY_GET_KENH_TV_LIST = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich "
+        private const String SQL_QUERY_GET_KENH_TV_LIST = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich, LinkHong, LichHong "
                                                         + @"FROM KenhTivi "
                                                         + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG;
-        private const String SQL_QUERY_ADD_KENH_TV = @"INSERT INTO KenhTivi(TenMaKenh, LinkPhat, ConHoatDong, NguonGoc, MoTaRutTrich, MoTaKenh) "
+        private const String SQL_QUERY_ADD_KENH_TV = @"INSERT INTO KenhTivi(MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich) "
                                                    + @"VALUES ("
                                                    + SQL_PARA_TEN_MA_KENH + ", " + SQL_PARA_LINK + ", " + SQL_PARA_CON_HOAT_DONG + ", " + SQL_PARA_NGUON_GOC + ", "
                                                    + SQL_PARA_MO_TA_RUT_TRICH + ", " + SQL_PARA_MO_TA_KENH
@@ -27,7 +27,7 @@ namespace TiviK2Plus_WebServiceApp
                                                    + @"FROM KenhTivi "
                                                    + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG
                                                    + @" AND TenMaKenh = " + SQL_PARA_TEN_MA_KENH;
-        private const String SQL_QUERY_SEARCH_KENHTV = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich "
+        private const String SQL_QUERY_SEARCH_KENHTV = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich, LinkHong, LichHong "
                                                      + @"FROM KenhTivi "
                                                      + @"WHERE ((ConHoatDong = " + SQL_PARA_CON_HOAT_DONG + ")"
                                                      + " AND ((TenMaKenh Like " + SQL_PARA_TEN_MA_KENH + ")"
@@ -124,6 +124,16 @@ namespace TiviK2Plus_WebServiceApp
                     if (!_dataReader.IsDBNull(5))
                     {
                         buffer.MoTaRutTrich = _dataReader.GetString(5);
+                    }
+
+                    if (!_dataReader.IsDBNull(6))
+                    {
+                        buffer.LinkHong = _dataReader.GetInt32(6);
+                    }
+
+                    if (_dataReader.IsDBNull(7))
+                    {
+                        buffer.LichHong = _dataReader.GetInt32(7);
                     }
 
                     _kenhTVList.Add(buffer);
@@ -338,6 +348,16 @@ namespace TiviK2Plus_WebServiceApp
                     if (!_dataReader.IsDBNull(5))
                     {
                         _buffer.MoTaRutTrich = _dataReader.GetString(5);
+                    }
+
+                    if (!_dataReader.IsDBNull(6))
+                    {
+                        _buffer.LinkHong = _dataReader.GetInt32(6);
+                    }
+
+                    if (_dataReader.IsDBNull(7))
+                    {
+                        _buffer.LichHong = _dataReader.GetInt32(7);
                     }
 
                     _kenhTVList.Add(_buffer);
