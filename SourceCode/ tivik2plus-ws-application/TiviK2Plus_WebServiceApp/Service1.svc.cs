@@ -112,6 +112,11 @@ namespace TiviK2Plus_WebServiceApp
             return KenhTV_BUS.Object.UpdateKenhTV(kenhTV);
         }
 
+        public bool DeleteKenhTV(int maKenh)
+        {
+            return KenhTV_BUS.Object.DeleteKenhTV(maKenh);
+        }
+
         #endregion
     }
 }

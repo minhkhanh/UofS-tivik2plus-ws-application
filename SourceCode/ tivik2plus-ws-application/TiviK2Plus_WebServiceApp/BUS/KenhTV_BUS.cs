@@ -110,6 +110,11 @@ namespace TiviK2Plus_WebServiceApp
         {
             return _kenhTV_DAO.UpdateKenhTV(kenhTV);
         }
+
+        public bool DeleteKenhTV(int maKenh)
+        {
+            return KenhTV_DAO.Object.DeleteKenhTV(maKenh);
+        }
         #endregion
     }
 }
