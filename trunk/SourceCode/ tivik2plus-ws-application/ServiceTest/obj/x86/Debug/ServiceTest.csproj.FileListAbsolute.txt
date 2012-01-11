@@ -1,0 +1,2 @@
+H:\Giao Trinh\DH KHTN\HK7\Web 2.0\DoAnCuoiKy\SourceCode\ tivik2plus-ws-application\ServiceTest\bin\Debug\ServiceTest.exe.config
+H:\Giao Trinh\DH KHTN\HK7\Web 2.0\DoAnCuoiKy\SourceCode\ tivik2plus-ws-application\ServiceTest\obj\x86\Debug\ResolveAssemblyReference.cache
