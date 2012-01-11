@@ -7,7 +7,8 @@ using System.ServiceModel;
 
 namespace TiviK2Plus_WebServiceApp
 {
-    [DataContract]
+    [Serializable]
+    [DataContract(Namespace = "")]
     public class KenhTV_DTO
     {
         #region Properties

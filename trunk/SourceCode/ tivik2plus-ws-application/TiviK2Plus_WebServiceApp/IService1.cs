@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using TiviK2Plus_WebServiceApp.Core;
+using System.Xml.Serialization;
 
 namespace TiviK2Plus_WebServiceApp
 {
@@ -14,8 +15,8 @@ namespace TiviK2Plus_WebServiceApp
     public interface IService1
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "kenhtv?getlist", ResponseFormat = WebMessageFormat.Json)]
-        List<KenhTV_DTO> GetKenhTVList();
+        [WebInvoke(Method = "GET", UriTemplate = "kenhtv?getlist", ResponseFormat = WebMessageFormat.Xml)]
+        KenhTV_DTO[] GetKenhTVList();
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "plus?a={a}&b={b}", ResponseFormat = WebMessageFormat.Json)]
@@ -26,7 +27,7 @@ namespace TiviK2Plus_WebServiceApp
         AkhoiTestClass AkhoiTestOperation(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "insertkenhtv", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "insertkenhtv", ResponseFormat = WebMessageFormat.Xml)]
         bool AddKenhTV(KenhTV_DTO kenhTV);
 
         [OperationContract]
@@ -39,7 +40,7 @@ namespace TiviK2Plus_WebServiceApp
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "kenhtv/getlink?tenmakenh={tenMaKenh}", ResponseFormat = WebMessageFormat.Json)]
-        String GetLinkPhatWithTenMaKenh(String tenMaKenh);
+        SourceTypeWrapper GetLinkPhatWithTenMaKenh(String tenMaKenh);
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "kenhtv/errorlink?tenmakenh={tenMaKenh}", ResponseFormat = WebMessageFormat.Json)]

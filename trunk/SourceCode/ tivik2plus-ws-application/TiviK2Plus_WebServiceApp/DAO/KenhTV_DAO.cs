@@ -403,5 +403,81 @@ namespace TiviK2Plus_WebServiceApp
             return _linkPhat;
         }
         #endregion
+
+        #region Akhoi operations
+
+        public string LayLinkNguon(string tenMaKenh)
+        {
+            OleDbConnection connection = null;
+            string result = "";
+
+            try
+            {
+                connection = Connect();
+                OleDbCommand _command = new OleDbCommand("select NguonGoc from KenhTivi where TenMaKenh = @tenMaKenh", connection);
+
+                OleDbParameter _parameter = new OleDbParameter("@tenMaKenh", OleDbType.VarChar);
+                _parameter.Value = tenMaKenh;
+                _command.Parameters.Add(_parameter);
+
+                OleDbDataReader _dataReader = _command.ExecuteReader();
+                if (_dataReader.Read())
+                {
+                    if (!_dataReader.IsDBNull(0))
+                        result = _dataReader.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                result = "";
+            }
+            finally
+            {
+                if ((connection != null) && (connection.State == System.Data.ConnectionState.Open))
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        public string LayMoTaRutTrich(string tenMaKenh)
+        {
+            OleDbConnection connection = null;
+            string result = "";
+
+            try
+            {
+                connection = Connect();
+                OleDbCommand _command = new OleDbCommand("select MoTaRutTrich from KenhTivi where TenMaKenh = @tenMaKenh", connection);
+
+                OleDbParameter _parameter = new OleDbParameter("@tenMaKenh", OleDbType.VarChar);
+                _parameter.Value = tenMaKenh;
+                _command.Parameters.Add(_parameter);
+
+                OleDbDataReader _dataReader = _command.ExecuteReader();
+                if (_dataReader.Read())
+                {
+                    if (!_dataReader.IsDBNull(0))
+                        result = _dataReader.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                result = "";
+            }
+            finally
+            {
+                if ((connection != null) && (connection.State == System.Data.ConnectionState.Open))
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }
