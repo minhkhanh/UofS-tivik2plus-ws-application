@@ -15,13 +15,12 @@ namespace TiviK2Plus_WebServiceApp
         #endregion
 
         #region Constants
-        private const String SQL_QUERY_GET_KENH_TV_LIST = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich, LinkHong, LichHong "
-                                                        + @"FROM KenhTivi "
-                                                        + @"WHERE ConHoatDong = " + SQL_PARA_CON_HOAT_DONG;
-        private const String SQL_QUERY_ADD_KENH_TV = @"INSERT INTO KenhTivi(MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich) "
+        private const String SQL_QUERY_GET_KENH_TV_LIST = @"SELECT MaKenh, TenMaKenh, MoTaKenh, LinkPhat, NguonGoc, MoTaRutTrich, LinkHong, LichHong, ConHoatDong "
+                                                        + @"FROM KenhTivi";
+        private const String SQL_QUERY_ADD_KENH_TV = @"INSERT INTO KenhTivi(TenMaKenh, LinkPhat, ConHoatDong, NguonGoc, MoTaRutTrich, MoTaKenh, LinkHong, LichHong) "
                                                    + @"VALUES ("
-                                                   + SQL_PARA_TEN_MA_KENH + ", " + SQL_PARA_LINK + ", " + SQL_PARA_CON_HOAT_DONG + ", " + SQL_PARA_NGUON_GOC + ", "
-                                                   + SQL_PARA_MO_TA_RUT_TRICH + ", " + SQL_PARA_MO_TA_KENH
+                                                   + SQL_PARA_TEN_MA_KENH + ", " + SQL_PARA_LINK + ", " + SQL_PARA_CON_HOAT_DONG + ", " + SQL_PARA_NGUON_GOC + ", " + SQL_PARA_MO_TA_RUT_TRICH+ ", "
+                                                   + SQL_PARA_MO_TA_KENH + ", " + SQL_PARA_LINK_HONG + ", " + SQL_PARA_LICH_HONG
                                                    + @")";
         private const String SQL_QUERY_GET_MA_KENH = @"SELECT MaKenh "
                                                    + @"FROM KenhTivi "
@@ -102,12 +101,7 @@ namespace TiviK2Plus_WebServiceApp
             try
             {
                 _connection = Connect();
-                OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_KENH_TV_LIST, _connection);
-                
-                OleDbParameter _parameter = new OleDbParameter(SQL_PARA_CON_HOAT_DONG, OleDbType.Boolean);
-                _parameter.Value = Constants.KENH_TV_CON_HOAT_DONG;
-                _command.Parameters.Add(_parameter);
-                
+                OleDbCommand _command = new OleDbCommand(SQL_QUERY_GET_KENH_TV_LIST, _connection);                
                 OleDbDataReader _dataReader = _command.ExecuteReader();
                 KenhTV_DTO buffer;
                 while (_dataReader.Read())
@@ -146,9 +140,14 @@ namespace TiviK2Plus_WebServiceApp
                         buffer.LinkHong = _dataReader.GetInt32(6);
                     }
 
-                    if (_dataReader.IsDBNull(7))
+                    if (!_dataReader.IsDBNull(7))
                     {
                         buffer.LichHong = _dataReader.GetInt32(7);
+                    }
+
+                    if (!_dataReader.IsDBNull(8))
+                    {
+                        buffer.ConHoatDong = _dataReader.GetBoolean(8);
                     }
 
                     _kenhTVList.Add(buffer);
@@ -218,6 +217,14 @@ namespace TiviK2Plus_WebServiceApp
 
                 _parameter = new OleDbParameter(SQL_PARA_MO_TA_KENH, OleDbType.VarChar);
                 _parameter.Value = kenhTV.MoTaKenh;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LINK_HONG, OleDbType.Integer);
+                _parameter.Value = kenhTV.LinkHong;
+                _command.Parameters.Add(_parameter);
+
+                _parameter = new OleDbParameter(SQL_PARA_LICH_HONG, OleDbType.Integer);
+                _parameter.Value = kenhTV.LichHong;
                 _command.Parameters.Add(_parameter);
 
                 _result = _command.ExecuteNonQuery();
