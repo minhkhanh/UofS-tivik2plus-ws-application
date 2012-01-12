@@ -7,8 +7,7 @@ using System.ServiceModel;
 
 namespace AdminClient
 {
-    [Serializable]
-    [DataContract(Namespace = "")]
+    [DataContract(Namespace="")]
     public class KenhTV_DTO
     {
         #region Properties
@@ -99,6 +98,8 @@ namespace AdminClient
             _moTaRutTrich = @"";
             _nguonGoc = @"";
             _tenMaKenh = @"";
+            _linkHong = 0;
+            _lichHong = 0;
         }
         #endregion
     }

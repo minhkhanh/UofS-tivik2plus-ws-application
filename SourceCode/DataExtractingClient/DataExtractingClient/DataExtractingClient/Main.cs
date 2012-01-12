@@ -15,16 +15,18 @@ namespace AdminClient
 {
     public partial class Main : Form
     {
+        private int _lastIndex = -1;
+
         public Main()
         {
             InitializeComponent();
 
             InitChannelGrid();
-            txbServiceUrl.Text = @"http://localhost:6421/Service1.svc";
+            txbServiceUrl.Text = @"http://localhost:5021/Service1.svc";
         }
 
         private void InitChannelGrid()
-        { 
+        {
             gridChannel.Columns.Add("STT", "STT");
             gridChannel.Columns.Add("TenMaKenh", "Tên mã kênh");
             gridChannel.Columns.Add("LinkPhat", "Link phát");
@@ -32,7 +34,8 @@ namespace AdminClient
             gridChannel.Columns.Add("MoTaRutTrich", "Mô tả rút trích");
             gridChannel.Columns.Add("MoTaKenh", "Mô tả kênh");
             gridChannel.Columns.Add("LinkHong", "Report link");
-            gridChannel.Columns.Add("LichHong", "Report lich");
+            //gridChannel.Columns.Add("LichHong", "Report lịch");
+            gridChannel.Columns.Add("ConHoatDong", "Còn hoạt động");
 
             gridChannel.Columns["STT"].Width = 50;
             gridChannel.Columns["TenMaKenh"].Width = 120;
@@ -41,7 +44,8 @@ namespace AdminClient
             gridChannel.Columns["MoTaRutTrich"].Width = 150;
             gridChannel.Columns["MoTaKenh"].Width = 120;
             gridChannel.Columns["LinkHong"].Width = 120;
-            gridChannel.Columns["LichHong"].Width = 120;
+            //gridChannel.Columns["LichHong"].Width = 120;
+            gridChannel.Columns["ConHoatDong"].Width = 120;
         }
 
         private string GetChannelListReqUrl()
@@ -51,7 +55,17 @@ namespace AdminClient
 
         private string GetUpdateReqUrl()
         {
-            return txbServiceUrl.Text.Trim() + "/kenhtv/getlist";
+            return txbServiceUrl.Text.Trim() + "/kenhtv/update";
+        }
+
+        private string GetInsertReqUrl()
+        {
+            return txbServiceUrl.Text.Trim() + "/insertkenhtv";
+        }
+
+        private string GetDeleteReqUrl(int id)
+        {
+            return txbServiceUrl.Text.Trim() + "/kenhtv/delete?maKenh=" + id.ToString();
         }
 
         private void FocusRow(int index)
@@ -68,12 +82,12 @@ namespace AdminClient
                 txbExtrDescr.Text = channel.MoTaRutTrich;
                 txbChanDescr.Text = channel.MoTaKenh;
                 txbLinkReport.Text = channel.LinkHong.ToString();
-                txbScheReport.Text = channel.LichHong.ToString();
+                //txbScheReport.Text = channel.LichHong.ToString();
                 ckbAvailable.Checked = channel.ConHoatDong;
             }
         }
 
-        private void LoadChannelGrid()
+        private void LoadChannelGrid(int rowIdx)
         {
             HttpWebRequest request = WebRequest.Create(GetChannelListReqUrl()) as HttpWebRequest;
             request.Method = "GET";
@@ -96,13 +110,16 @@ namespace AdminClient
                         arrChannels[i].MoTaRutTrich,
                         arrChannels[i].MoTaKenh,
                         arrChannels[i].LinkHong,
-                        arrChannels[i].LichHong
+                        arrChannels[i].LichHong,
+                        arrChannels[i].ConHoatDong
                         );
 
                     gridChannel.Rows[i].Tag = arrChannels[i];
                 }
 
-                if (gridChannel.Rows.Count > 0)
+                if (rowIdx >= 0 && rowIdx < gridChannel.Rows.Count)
+                    FocusRow(rowIdx);
+                else if (gridChannel.Rows.Count > 0)
                     FocusRow(0);
 
                 respStream.Close();
@@ -111,7 +128,7 @@ namespace AdminClient
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadChannelGrid();
+            LoadChannelGrid(0);
         }
 
         private byte[] GetBytes(KenhTV_DTO channel)
@@ -132,8 +149,8 @@ namespace AdminClient
             byte[] reqBody = GetBytes(channel);
 
             // marked: URI_STRING
-            HttpWebRequest request = WebRequest.Create(txbServiceUrl.Text) as HttpWebRequest;
-            request.Method = "PUT";
+            HttpWebRequest request = WebRequest.Create(GetUpdateReqUrl()) as HttpWebRequest;
+            request.Method = "POST";
             request.ContentType = @"application/xml; charset=utf-8";
 
             request.ContentLength = reqBody.GetLength(0);
@@ -145,13 +162,15 @@ namespace AdminClient
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Stream respStream = response.GetResponseStream();
-                DataContractSerializer serializer = new DataContractSerializer(typeof(int));
+                DataContractSerializer serializer = new DataContractSerializer(typeof(bool));
 
-                int affectedRows = (int)serializer.ReadObject(respStream);
-                if (affectedRows <= 0)
-                    MessageBox.Show("Cập nhật không thành công.");
+                bool affectedRows = (bool)serializer.ReadObject(respStream);
+                if (affectedRows == false)
+                    DialogUtil.ShowFailureMsgbox("Cập nhật không thành công.");
                 else
-                    LoadChannelGrid();
+                {
+                    LoadChannelGrid(-1);
+                }
 
                 respStream.Close();
             }
@@ -160,8 +179,8 @@ namespace AdminClient
         private void AddChannel(KenhTV_DTO channel)
         {
             byte[] reqBody = GetBytes(channel);
-            
-            HttpWebRequest request = WebRequest.Create(txbServiceUrl.Text + "/kenhtv/insert") as HttpWebRequest;
+
+            HttpWebRequest request = WebRequest.Create(GetInsertReqUrl()) as HttpWebRequest;
             request.Method = "POST";
             request.ContentType = @"application/xml; charset=utf-8";
 
@@ -176,11 +195,13 @@ namespace AdminClient
                 Stream respStream = response.GetResponseStream();
                 DataContractSerializer serializer = new DataContractSerializer(typeof(bool));
 
-                bool result  = (bool)serializer.ReadObject(respStream);
+                bool result = (bool)serializer.ReadObject(respStream);
                 if (result == false)
-                    Utilities.ShowFailureMsgbox("Thêm không thành công.");
+                    DialogUtil.ShowFailureMsgbox("Thêm không thành công.");
                 else
-                    LoadChannelGrid();
+                {
+                    LoadChannelGrid(gridChannel.RowCount - 1);
+                }
 
                 respStream.Close();
             }
@@ -195,7 +216,7 @@ namespace AdminClient
             txbSourcePage.Text = null;
             txbExtrDescr.Text = null;
             txbLinkReport.Text = null;
-            txbScheReport.Text = null;
+            //txbScheReport.Text = null;
             txbChanCode.Focus();
             ckbAvailable.Checked = true;
 
@@ -216,8 +237,8 @@ namespace AdminClient
             if (int.TryParse(txbLinkReport.Text, out report))
                 channel.LinkHong = report;
 
-            if (int.TryParse(txbLinkReport.Text, out report))
-                channel.LichHong = report;
+            //if (int.TryParse(txbScheReport.Text, out report))
+            //    channel.LichHong = report;
 
             AddChannel(channel);
         }
@@ -238,19 +259,46 @@ namespace AdminClient
                 if (int.TryParse(txbLinkReport.Text, out report))
                     channel.LinkHong = report;
 
-                if (int.TryParse(txbLinkReport.Text, out report))
-                    channel.LichHong = report;
+                //if (int.TryParse(txbScheReport.Text, out report))
+                //    channel.LichHong = report;
+
+                UpdateChannel(channel);
+            }
+        }
+
+        private void DeleteChannel(int id)
+        {
+            HttpWebRequest request = WebRequest.Create(GetDeleteReqUrl(id)) as HttpWebRequest;
+            request.Method = "GET";
+
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Stream respStream = response.GetResponseStream();
+                DataContractSerializer serializer = new DataContractSerializer(typeof(bool));
+
+                bool affectedRows = (bool)serializer.ReadObject(respStream);
+                if (affectedRows == false)
+                    DialogUtil.ShowFailureMsgbox("Xóa không thành công.");
+                else
+                    LoadChannelGrid(0);
+
+                respStream.Close();
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            KenhTV_DTO channel = groupDetail.Tag as KenhTV_DTO;
+            if (channel != null)
+            {
+                DeleteChannel(channel.MaKenh);
+            }
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            LoadChannelGrid();
+            LoadChannelGrid(0);
         }
 
         private void gridChannel_RowEnter(object sender, DataGridViewCellEventArgs e)

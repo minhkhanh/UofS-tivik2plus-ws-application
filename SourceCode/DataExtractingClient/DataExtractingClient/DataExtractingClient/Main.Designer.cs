@@ -36,6 +36,9 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupDetail = new System.Windows.Forms.GroupBox();
+            this.txbLinkReport = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.ckbAvailable = new System.Windows.Forms.CheckBox();
             this.txbChanDescr = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txbExtrDescr = new System.Windows.Forms.TextBox();
@@ -53,11 +56,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
             this.gridChannel = new System.Windows.Forms.DataGridView();
-            this.ckbAvailable = new System.Windows.Forms.CheckBox();
-            this.txbLinkReport = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txbScheReport = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -112,6 +110,7 @@
             // 
             // txbServiceUrl
             // 
+            this.txbServiceUrl.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbServiceUrl.Location = new System.Drawing.Point(98, 12);
             this.txbServiceUrl.Name = "txbServiceUrl";
             this.txbServiceUrl.Size = new System.Drawing.Size(689, 27);
@@ -151,8 +150,6 @@
             // 
             // groupDetail
             // 
-            this.groupDetail.Controls.Add(this.txbScheReport);
-            this.groupDetail.Controls.Add(this.label9);
             this.groupDetail.Controls.Add(this.txbLinkReport);
             this.groupDetail.Controls.Add(this.label8);
             this.groupDetail.Controls.Add(this.ckbAvailable);
@@ -173,6 +170,32 @@
             this.groupDetail.TabIndex = 11;
             this.groupDetail.TabStop = false;
             this.groupDetail.Text = "Chi tiết";
+            // 
+            // txbLinkReport
+            // 
+            this.txbLinkReport.Location = new System.Drawing.Point(12, 287);
+            this.txbLinkReport.Name = "txbLinkReport";
+            this.txbLinkReport.Size = new System.Drawing.Size(120, 27);
+            this.txbLinkReport.TabIndex = 32;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 268);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 16);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Report Link";
+            // 
+            // ckbAvailable
+            // 
+            this.ckbAvailable.AutoSize = true;
+            this.ckbAvailable.Location = new System.Drawing.Point(12, 320);
+            this.ckbAvailable.Name = "ckbAvailable";
+            this.ckbAvailable.Size = new System.Drawing.Size(121, 20);
+            this.ckbAvailable.TabIndex = 30;
+            this.ckbAvailable.Text = "Còn hoạt động";
+            this.ckbAvailable.UseVisualStyleBackColor = true;
             // 
             // txbChanDescr
             // 
@@ -335,51 +358,10 @@
             this.gridChannel.MultiSelect = false;
             this.gridChannel.Name = "gridChannel";
             this.gridChannel.ReadOnly = true;
+            this.gridChannel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridChannel.Size = new System.Drawing.Size(581, 451);
             this.gridChannel.TabIndex = 0;
             this.gridChannel.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridChannel_RowEnter);
-            // 
-            // ckbAvailable
-            // 
-            this.ckbAvailable.AutoSize = true;
-            this.ckbAvailable.Location = new System.Drawing.Point(12, 320);
-            this.ckbAvailable.Name = "ckbAvailable";
-            this.ckbAvailable.Size = new System.Drawing.Size(121, 20);
-            this.ckbAvailable.TabIndex = 30;
-            this.ckbAvailable.Text = "Còn hoạt động";
-            this.ckbAvailable.UseVisualStyleBackColor = true;
-            // 
-            // txbLinkReport
-            // 
-            this.txbLinkReport.Location = new System.Drawing.Point(12, 287);
-            this.txbLinkReport.Name = "txbLinkReport";
-            this.txbLinkReport.Size = new System.Drawing.Size(120, 27);
-            this.txbLinkReport.TabIndex = 32;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 268);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 16);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "Report Link";
-            // 
-            // txbScheReport
-            // 
-            this.txbScheReport.Location = new System.Drawing.Point(138, 287);
-            this.txbScheReport.Name = "txbScheReport";
-            this.txbScheReport.Size = new System.Drawing.Size(120, 27);
-            this.txbScheReport.TabIndex = 34;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(138, 268);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 16);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Report Lịch";
             // 
             // Main
             // 
@@ -440,8 +422,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txbServiceUrl;
         private System.Windows.Forms.CheckBox ckbAvailable;
-        private System.Windows.Forms.TextBox txbScheReport;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txbLinkReport;
         private System.Windows.Forms.Label label8;
     }
