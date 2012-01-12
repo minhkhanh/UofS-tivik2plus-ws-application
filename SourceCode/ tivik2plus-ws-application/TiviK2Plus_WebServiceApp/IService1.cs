@@ -15,7 +15,7 @@ namespace TiviK2Plus_WebServiceApp
     public interface IService1
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "kenhtv/getlist", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "kenhtv/getlist", ResponseFormat = WebMessageFormat.Xml)]
         KenhTV_DTO[] GetKenhTVList();
 
         [OperationContract]
@@ -47,11 +47,11 @@ namespace TiviK2Plus_WebServiceApp
         void CheckErrorLink(String tenMaKenh);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "kenhtv/update", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "kenhtv/update", ResponseFormat = WebMessageFormat.Xml)]
         bool UpdateKenhTV(KenhTV_DTO kenhTV);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "kenhtv/delete?makenh={maKenh}", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "kenhtv/delete?makenh={maKenh}", ResponseFormat = WebMessageFormat.Xml)]
         bool DeleteKenhTV(int maKenh);
     }
 }

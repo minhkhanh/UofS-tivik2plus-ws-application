@@ -7,8 +7,7 @@ using System.ServiceModel;
 
 namespace TiviK2Plus_WebServiceApp
 {
-    [Serializable]
-    [DataContract(Namespace = "")]
+    [DataContract(Namespace="")]
     public class KenhTV_DTO
     {
         #region Properties
@@ -99,6 +98,8 @@ namespace TiviK2Plus_WebServiceApp
             _moTaRutTrich = @"";
             _nguonGoc = @"";
             _tenMaKenh = @"";
+            _linkHong = 0;
+            _lichHong = 0;
         }
         #endregion
     }
